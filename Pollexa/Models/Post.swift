@@ -14,4 +14,8 @@ struct Post: Decodable {
     let createdAt: Date
     let content: String
     let options: [Option]
+    let user : User
+    
+
+    
 }

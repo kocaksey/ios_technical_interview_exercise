@@ -23,7 +23,7 @@ class PostProvider {
     }()
     
     // MARK: - Life Cycle
-    private init(fileName: String) {
+     init(fileName: String) {
         self.filename = fileName
     }
     

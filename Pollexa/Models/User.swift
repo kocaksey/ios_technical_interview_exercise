@@ -7,36 +7,41 @@
 
 import UIKit
 
-struct User {
+extension Post {
     
-    // MARK: - Types
-    enum CodingKeys: String, CodingKey {
-        case id
-        case username
-        case imageName
-    }
-    
-    // MARK: - Properties
-    let id: String
-    let username: String
-    let image: UIImage
-    
-    // MARK: - Life Cycle
-    init(from decoder: any Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
+    struct User :Decodable {
         
-        id = try container.decode(String.self, forKey: .id)
-        username = try container.decode(String.self, forKey: .username)
+        // MARK: - Types
+        enum CodingKeys: String, CodingKey {
+            case id
+            case username
+            case imageName
+        }
         
-        let imageName = try container.decode(String.self, forKey: .imageName)
+        // MARK: - Properties
+        let id: String
+        let username: String
+        let image: UIImage
         
-        if let image = UIImage(named: imageName) {
-            self.image = image
-        } else {
-            throw DecodingError.dataCorrupted(.init(
-                codingPath: [CodingKeys.imageName],
-                debugDescription: "An image with name \(imageName) could not be loaded from the bundle.")
-            )
+        // MARK: - Life Cycle
+        init(from decoder: any Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            
+            id = try container.decode(String.self, forKey: .id)
+            username = try container.decode(String.self, forKey: .username)
+            
+            let imageName = try container.decode(String.self, forKey: .imageName)
+            
+            if let image = UIImage(named: imageName) {
+                self.image = image
+            } else {
+                throw DecodingError.dataCorrupted(.init(
+                    codingPath: [CodingKeys.imageName],
+                    debugDescription: "An image with name \(imageName) could not be loaded from the bundle.")
+                )
+            }
         }
     }
+
+    
 }

@@ -9,10 +9,21 @@ import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    var window: UIWindow?
+
 
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        window = UIWindow(frame: UIScreen.main.bounds)
+        
+        let rootViewController = DiscoverViewController() // Kendi ViewController'ınızı burada kullanın
+        window?.rootViewController = UINavigationController(rootViewController: rootViewController)
+        
+        // UIWindow'u görünür yapın
+        window?.makeKeyAndVisible()
+
         // Override point for customization after application launch.
         return true
     }
